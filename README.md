@@ -1,28 +1,31 @@
-# One Piece Game Zone
+# One Piece Game Zone — Funzone-inspired branch
 
-A mobile-first React + Vite landing page for a console gaming zone, inspired by the supplied black, red and yellow arcade theme.
+This branch redesigns the existing React/Vite page with a multi-section gaming-zone layout inspired by the information architecture and polish of https://www.ps5funzone.in/ without copying its brand or business details.
+
+## Design
+- Dark console-lounge aesthetic with One Piece black / red / yellow visual identity
+- Responsive top navigation, high-impact hero and service cards
+- Filterable game library using the supplied title list
+- Clear pricing for solo sessions, Crew Mode, extra controller and 10-hour pass
+- Room gallery, FAQ accordion, enquiry form and mobile sticky booking CTA
+- Scroll reveal, animated marquee, floating accents and hover transitions
+- Reduced-motion support for accessibility
 
 ## Run locally
-1. Install Node.js (18+).
-2. Run `npm install`.
-3. Run `npm run dev`.
-
-## Included
-- Responsive landing page and mobile navigation
-- Interactive game-category filter
-- Individual, crew, controller add-on and membership pricing
-- Session enquiry form
-- Mobile-friendly sections and scroll navigation
+```bash
+npm install
+npm run dev
+```
 
 ## Booking setup
-In `src/App.jsx`, set `CONTACT_WHATSAPP` to the business WhatsApp number in international format, digits only. The enquiry form then opens a pre-filled WhatsApp message. Until configured, it remains in demo mode.
+Set `WHATSAPP_NUMBER` in `src/App.jsx` to the real business WhatsApp number in international format, digits only. It stays in demo mode until configured. Add a verified street address and hours before publishing as business contact details.
 
-## Prices shown
-- Solo: ₹100 / 45 minutes
-- Solo: ₹120 / 1 hour
-- Crew: ₹200 / hour for 3 players
-- Crew: ₹250 / hour for 4 players
-- Extra controller: ₹50
-- 10-hour pass: ₹800 (₹80 per hour)
+## Pricing in this build
+- ₹100 / 45-minute solo play
+- ₹120 / 1-hour solo play
+- ₹200 / 1 hour for 3 players
+- ₹250 / 1 hour for 4 players
+- ₹50 extra controller
+- ₹800 / 10-hour pass (₹80/hour)
 
-Images use remote Unsplash stock photography and can be replaced with approved brand photos later.
+The hero uses the supplied room photo at `public/images/zone-hero.webp`; the additional gallery and card photography are illustrative Unsplash stock images.
