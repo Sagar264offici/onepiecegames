@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown,
   Clock3, Crown, Gamepad2, Headphones, Menu, MonitorPlay, ShieldCheck,
@@ -51,6 +51,27 @@ export default function App() {
   const [chosen, setChosen] = useState("solo60");
   const [form, setForm] = useState({ name: "", date: "", session: "1-hour solo session" });
   const [notice, setNotice] = useState("");
+
+  // Soft reveal-on-scroll motion; content remains visible when motion APIs are unavailable.
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+    const selector = ".hero-copy, .hero-art, .section-head, .feature-card, .game-card, .price-card, .controller-addon, .crew-photo, .crew-copy, .gallery-card, .booking-form, .book-promise";
+    const nodes = Array.from(document.querySelectorAll(selector));
+    nodes.forEach((node, index) => {
+      node.classList.add("motion-reveal");
+      node.style.setProperty("--reveal-delay", (index % 4) * 85 + "ms");
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+    nodes.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
+  }, []);
   const visibleGames = gameFilter === "All games" ? games : games.filter(function (game) { return game.type === gameFilter; });
 
   function choosePlan(id) {
@@ -106,6 +127,7 @@ export default function App() {
         <div className="hero-shade" />
         <div className="hero-label"><i /> PLAYER 01 · READY</div>
         <div className="hero-sticker"><span>YOUR</span><strong>CREW</strong><span>AWAITS!</span><Swords size={24} /></div>
+        <span className="hero-orbit orbit-one" aria-hidden="true">✦</span><span className="hero-orbit orbit-two" aria-hidden="true">＋</span>
         <div className="hero-price"><span>START YOUR RUN</span><strong>₹100<span>*</span></strong><small>*45-minute solo play</small></div>
         <div className="hero-caption"><span>01 / THE GAME ZONE</span><span>PRESS START <ArrowUpRight size={14} /></span></div>
       </div>
